@@ -1,0 +1,39 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+hook_add = '''
+    autocmd StdinReadPre * let s:std_in=1
+    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+    let NERDTreeMinimalUI=1
+'''
+
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+hook_add = '''
+    let g:quickrun_config = {
+        \ '_' : {
+            \ 'runner/vimproc/updatetime' : 40,
+            \ 'outputter/buffer/split' : ':botright 8sp',
+        \ }
+    \}
+    
+    let g:quickrun_no_default_key_mappings = 1
+    nmap <Leader>r :cclose<CR>:write<CR>:QuickRun -mode n<CR>
+'''
+
+[[plugins]]
+repo = 'kana/vim-submode'
+
+[[plugins]]
+repo = 'jacoborus/tender.vim'
+
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+hook_add = '''
+    let g:airline_powerline_fonts = 1
+    let g:airline_theme = 'tender'
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline_section_z = airline#section#create(['windowswap', '%3p%% ', 'linenr', ':%3v'])
+'''
