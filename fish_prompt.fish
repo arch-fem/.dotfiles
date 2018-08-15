@@ -158,9 +158,8 @@ function get_hostname -d "Set current hostname to prompt variable $HOSTNAME_PROM
   end
 end
 
-
 function prompt_dir -d "Display the current directory"
-  switch $fish_bind_mode
+    switch $fish_bind_mode
       case default
         prompt_segment green black (prompt_pwd)
       case insert
@@ -242,13 +241,13 @@ end
 
 function prompt_status -d "the symbols for a non zero exit status, root and background jobs"
     if [ $RETVAL -ne 0 ]
-      prompt_segment normal $color_status_nonzero_str "✘"
+      prompt_segment $color_status_nonzero_bg $color_status_nonzero_str "✘"
     end
 
     # if superuser (uid == 0)
     set -l uid (id -u $USER)
     if [ $uid -eq 0 ]
-      prompt_segment brblack $color_status_superuser_str "⚡"
+      prompt_segment $color_status_superuser_bg $color_status_superuser_str "⚡"
     end
 
     # Jobs display
@@ -258,7 +257,8 @@ function prompt_status -d "the symbols for a non zero exit status, root and back
 end
 
 function prompt_finish_2 -d "finish"
-  switch $fish_bind_mode
+    echo
+    switch $fish_bind_mode
       case default
         set_color green normal
       case insert
@@ -283,6 +283,5 @@ function fish_prompt
   type -q git; and prompt_git
   type -q svn; and prompt_svn
   prompt_finish
-  echo
   prompt_finish_2
 end
